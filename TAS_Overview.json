@@ -1,0 +1,1080 @@
+{
+  "__inputs": [
+    {
+      "name": "VAR_INTERFACE_NAME",
+      "type": "constant",
+      "label": "interface_name",
+      "value": "enp0s8",
+      "description": ""
+    },
+    {
+      "name": "VAR_CPU_COUNT",
+      "type": "constant",
+      "label": "cpu_count",
+      "value": "1",
+      "description": ""
+    }
+  ],
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "8.2.7"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": null,
+  "iteration": 1651819168472,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 0
+                },
+                "1": {
+                  "color": "green",
+                  "index": 1
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "up{server=\"tas\"}",
+          "interval": "",
+          "legendFormat": "E: {{job}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "node_systemd_unit_state{state=\"active\", name=\"tmnf-tas.service\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "S: tmnf-tas",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "node_systemd_unit_state{state=\"active\", name=~\"tmnfd.service\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "S: tmnfd",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "node_systemd_unit_state{state=\"active\", name=\"docker.haproxy.service\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "S: haproxy",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "node_systemd_unit_state{state=\"active\", name=~\"docker.mongodb.service\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "S: mongodb",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "node_systemd_unit_state{state=\"active\", name=~\"minio.service\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "S: minio",
+          "refId": "F"
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 8,
+        "y": 0
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "8.2.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "tas_players_active{server=\"tas\"}",
+          "interval": "",
+          "legendFormat": "active",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "tas_players_total{server=\"tas\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "total",
+          "refId": "B"
+        }
+      ],
+      "title": "Players",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 4,
+        "x": 12,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "node_load1{server=\"tas\"} / $cpu_count",
+          "interval": "",
+          "legendFormat": "load1",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "node_load5{server=\"tas\"} / $cpu_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "load5",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "node_load15{server=\"tas\"} / $cpu_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "load15",
+          "refId": "C"
+        }
+      ],
+      "title": "CPU",
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "delay"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "ms"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#1f61c480",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "update"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "scanAndOrder"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(mongodb_ss_opcounters{server=\"tas\"}[1m])",
+          "interval": "",
+          "legendFormat": "{{legacy_op_type}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(mongodb_sys_disks_sda_io_queued_ms{server=\"tas\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "delay",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(mongodb_ss_metrics_operation_scanAndOrder{server=\"tas\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "scanAndOrder",
+          "refId": "C"
+        }
+      ],
+      "title": "DB",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RX Bytes"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TX Bytes"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RX Packets"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TX Packets"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 8,
+        "x": 0,
+        "y": 6
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(node_network_receive_packets_total{device=\"$interface_name\", server=\"tas\"}[1m])",
+          "interval": "",
+          "legendFormat": "RX Packets",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(node_network_transmit_packets_total{device=\"$interface_name\", server=\"tas\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "TX Packets",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(node_network_receive_bytes_total{device=\"$interface_name\", server=\"tas\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "RX Bytes",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(node_network_transmit_bytes_total{device=\"$interface_name\", server=\"tas\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "TX Bytes",
+          "refId": "D"
+        }
+      ],
+      "title": "Network Troughput",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "size"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 8,
+        "y": 6
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "minio_bucket_usage_object_total{bucket=\"tas-replays\",server=\"tas\"}",
+          "interval": "",
+          "legendFormat": "count",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "minio_bucket_usage_total_bytes{bucket=\"tas-replays\",server=\"tas\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "size",
+          "refId": "B"
+        }
+      ],
+      "title": "Replays",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 80
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 4,
+        "x": 12,
+        "y": 11
+      },
+      "id": 7,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.2.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "(100 / node_memory_MemTotal_bytes{server=\"tas\"}) * (node_memory_MemTotal_bytes{server=\"tas\"} - node_memory_MemAvailable_bytes{server=\"tas\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Memory usage",
+      "type": "gauge"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "lookup"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "hits"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "percent"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#b877d9bf",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 8,
+        "x": 16,
+        "y": 11
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(haproxy_backend_http_cache_lookups_total{server=\"tas\", proxy=\"be_tas\"}[1m])",
+          "interval": "",
+          "legendFormat": "lookup",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "rate(haproxy_backend_http_cache_hits_total{server=\"tas\", proxy=\"be_tas\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "hits",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "(100 / rate(haproxy_backend_http_cache_lookups_total{server=\"tas\", proxy=\"be_tas\"}[1m])) * rate(haproxy_backend_http_cache_hits_total{server=\"tas\", proxy=\"be_tas\"}[1m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "percent",
+          "refId": "C"
+        }
+      ],
+      "title": "HAproxy Cache",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 8,
+        "y": 14
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "tas_laptimes_total{server=\"tas\"}",
+          "interval": "",
+          "legendFormat": "count",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "tas_laptimes_seconds_sum{server=\"tas\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "time",
+          "refId": "B"
+        }
+      ],
+      "title": "Laptimes",
+      "type": "stat"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 32,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "label": null,
+        "name": "interface_name",
+        "query": "${VAR_INTERFACE_NAME}",
+        "skipUrlSync": false,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_INTERFACE_NAME}",
+          "text": "${VAR_INTERFACE_NAME}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_INTERFACE_NAME}",
+            "text": "${VAR_INTERFACE_NAME}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "label": null,
+        "name": "cpu_count",
+        "query": "${VAR_CPU_COUNT}",
+        "skipUrlSync": false,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_CPU_COUNT}",
+          "text": "${VAR_CPU_COUNT}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_CPU_COUNT}",
+            "text": "${VAR_CPU_COUNT}",
+            "selected": false
+          }
+        ]
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "TAS Overview",
+  "uid": "0r5hBsQnz",
+  "version": 4
+}

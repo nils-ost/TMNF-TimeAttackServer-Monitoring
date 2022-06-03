@@ -1,0 +1,39 @@
+global:
+  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node'
+    static_configs:
+      - targets: ['##TAS_IP##:9100']
+        labels:
+          server: 'tas'
+
+  - job_name: 'tas'
+    static_configs:
+      - targets: ['##TAS_IP##:8001']
+        labels:
+          server: 'tas'
+
+  - job_name: 'haproxy'
+    static_configs:
+      - targets: ['##TAS_IP##:8404']
+        labels:
+          server: 'tas'
+
+  - job_name: 'mongodb'
+    static_configs:
+      - targets: ['##TAS_IP##:9216']
+        labels:
+          server: 'tas'
+
+  - job_name: 'minio'
+    metrics_path: /minio/v2/metrics/cluster
+    scheme: http
+    static_configs:
+      - targets: ['##TAS_IP##:9000']
+        labels:
+          server: 'tas'
